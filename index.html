@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSFDG — Council on Sustainable Fashion and Design of Grenada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2d4a;
+      --navy-mid: #2a4a6a;
+      --gold: #c4a35a;
+      --gold-light: #d4b87a;
+      --white: #ffffff;
+      --off-white: #f8f7f4;
+      --cream: #f2ede6;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --border: #e0ddd8;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--text); background: var(--white); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 68px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-circle {
+      width: 44px; height: 44px; border: 1.5px solid var(--navy);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .logo-circle-text {
+      font-family: var(--font-display); font-size: 13px; font-weight: 400;
+      color: var(--navy); letter-spacing: 0.05em;
+    }
+    .logo-full-text {
+      font-family: var(--font-body); font-size: 9px; font-weight: 300;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy);
+      line-height: 1.5; max-width: 130px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--text); text-decoration: none; font-size: 13px;
+      font-weight: 300; letter-spacing: 0.06em; opacity: 0.75; transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--navy); }
+    .nav-donate {
+      padding: 9px 24px; background: var(--navy); color: var(--white) !important;
+      opacity: 1 !important; font-size: 12px !important; font-weight: 400 !important;
+      letter-spacing: 0.1em !important; text-transform: uppercase;
+      transition: background 0.25s !important;
+    }
+    .nav-donate:hover { background: var(--navy-mid) !important; }
+
+    /* ── HERO ── */
+    #home {
+      height: 100vh; min-height: 600px; padding-top: 68px;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+    }
+    /* REPLACE WITH YOUR HERO IMAGE:
+       background-image: url('images/hero.jpg');
+       background-size: cover; background-position: center;
+    */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #2a1a0e 0%, #1a1208 40%, #0a0805 100%);
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+    }
+    /* placeholder texture */
+    .hero-bg::before {
+      content: 'Replace with hero image'; position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.2); font-family: var(--font-body);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative; z-index: 2; max-width: 700px; padding: 0 32px;
+      animation: fadeUp 1.2s ease both;
+    }
+    .hero-content h1 {
+      font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400; color: var(--white); line-height: 1.2;
+      margin-bottom: 16px; font-style: italic;
+    }
+    .hero-content h1 span { font-style: normal; display: block; font-size: 0.65em; letter-spacing: 0.04em; }
+    .hero-subtitle {
+      font-size: 14px; color: rgba(255,255,255,0.75); font-weight: 300;
+      letter-spacing: 0.1em; margin-bottom: 36px;
+    }
+    .hero-subtitle a { color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; }
+    .btn-hero {
+      display: inline-block; padding: 14px 44px;
+      border: 1px solid rgba(255,255,255,0.7); color: var(--white);
+      text-decoration: none; font-size: 13px; font-weight: 300;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .btn-hero:hover { background: rgba(255,255,255,0.12); border-color: white; }
+
+    /* ── SHARED ── */
+    .section-label {
+      font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px;
+    }
+    .section-heading {
+      font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 20px;
+    }
+    .section-body {
+      font-size: 15px; line-height: 1.85; color: var(--text-muted);
+      font-weight: 300; max-width: 560px;
+    }
+    .btn-primary {
+      display: inline-block; padding: 13px 36px; background: var(--navy);
+      color: var(--white); text-decoration: none; font-size: 12px;
+      font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--navy-mid); }
+    .btn-outline {
+      display: inline-block; padding: 13px 36px; border: 1px solid var(--navy);
+      color: var(--navy); text-decoration: none; font-size: 12px;
+      font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+    /* ── ABOUT / MISSION ── */
+    #about { padding: 100px 48px; background: var(--white); }
+    .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+    .about-visual {
+      background: var(--cream); aspect-ratio: 4/5; position: relative; overflow: hidden;
+    }
+    /* REPLACE WITH: <img src="images/about.jpg" alt="CSFDG" style="width:100%;height:100%;object-fit:cover;" /> */
+    .about-visual-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, #2a4a6a 0%, #1a2d4a 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); font-family: var(--font-body);
+    }
+    .mission-vision { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; }
+    .mv-item { padding-left: 24px; border-left: 2px solid var(--gold); }
+    .mv-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .mv-text { font-size: 15px; line-height: 1.8; color: var(--text-muted); font-weight: 300; }
+
+    /* ── PROGRAMS ── */
+    #programs { padding: 100px 48px; background: var(--off-white); }
+    .programs-inner { max-width: 1100px; margin: 0 auto; }
+    .programs-header { margin-bottom: 64px; }
+    .program-feature {
+      background: var(--white); display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; overflow: hidden; margin-bottom: 2px;
+    }
+    .program-image {
+      aspect-ratio: 4/3; overflow: hidden; position: relative;
+    }
+    /* REPLACE WITH: <img src="images/program-couturier.jpg" style="width:100%;height:100%;object-fit:cover;" /> */
+    .program-image-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, #c8a070, #a07848);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); font-family: var(--font-body);
+    }
+    .program-content { padding: 56px 56px; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+    .program-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .program-title { font-family: var(--font-display); font-size: 36px; font-weight: 400; color: var(--navy); line-height: 1.2; }
+    .program-subtitle { font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--text-muted); }
+    .program-body { font-size: 14px; line-height: 1.8; color: var(--text-muted); font-weight: 300; }
+
+    /* Instructors */
+    .instructors { margin-top: 64px; }
+    .instructors h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--navy); margin-bottom: 32px; }
+    .instructors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .instructor-card { background: var(--white); padding: 36px 28px; }
+    .instructor-role { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .instructor-name { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--navy); margin-bottom: 8px; }
+    .instructor-courses { font-size: 13px; color: var(--text-muted); font-weight: 300; line-height: 1.6; }
+
+    /* Fashion Impact Fund */
+    .fund-section {
+      margin-top: 80px; background: var(--navy); padding: 64px 56px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .fund-label { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--white); line-height: 1.3; margin-bottom: 16px; }
+    .fund-logo-placeholder {
+      font-family: var(--font-body); font-size: 24px; font-weight: 500;
+      letter-spacing: 0.1em; color: var(--white); text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.3); padding: 24px 32px; text-align: center;
+    }
+    .fund-body { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.65); font-weight: 300; }
+
+    /* ── SUSTAINABILITY ── */
+    #sustainability { padding: 100px 48px; background: var(--white); }
+    .sust-inner { max-width: 1100px; margin: 0 auto; }
+    .sust-header { text-align: center; margin-bottom: 64px; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 80px; }
+    .pillar-card {
+      background: var(--off-white); padding: 48px 36px; text-align: center;
+      position: relative; transition: background 0.3s;
+    }
+    .pillar-card:hover { background: var(--navy); }
+    .pillar-card:hover .pillar-title, .pillar-card:hover .pillar-body { color: var(--white); }
+    .pillar-num {
+      font-family: var(--font-display); font-size: 72px; font-weight: 300;
+      color: var(--gold); line-height: 1; margin-bottom: 16px; opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    .pillar-card:hover .pillar-num { opacity: 1; }
+    .pillar-title { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--navy); margin-bottom: 16px; transition: color 0.3s; }
+    .pillar-body { font-size: 14px; line-height: 1.8; color: var(--text-muted); font-weight: 300; transition: color 0.3s; }
+
+    /* UN section */
+    .un-section {
+      background: var(--cream); padding: 64px 56px; text-align: center;
+      margin-bottom: 60px;
+    }
+    .un-logo-text {
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy);
+      border: 1px solid var(--navy); display: inline-block; padding: 12px 24px;
+      margin-bottom: 28px;
+    }
+    .un-body { font-size: 15px; line-height: 1.85; color: var(--text-muted); font-weight: 300; max-width: 620px; margin: 0 auto 24px; }
+    .un-link { font-size: 13px; color: var(--navy); letter-spacing: 0.06em; }
+
+    /* Why Now / Our Story */
+    .why-now { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; margin-bottom: 80px; }
+    .why-title { font-family: var(--font-display); font-size: 72px; font-weight: 300; color: rgba(26,45,74,0.15); line-height: 0.9; }
+    .why-content h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--navy); margin-bottom: 20px; }
+    .why-content p { font-size: 15px; line-height: 1.85; color: var(--text-muted); font-weight: 300; margin-bottom: 16px; }
+
+    /* SDG tiles */
+    .sdg-section { text-align: center; }
+    .sdg-label { font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--navy); margin-bottom: 32px; }
+    .sdg-grid { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .sdg-tile {
+      width: 90px; height: 90px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      font-size: 9px; font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase; color: white; line-height: 1.3; padding: 8px;
+    }
+    .sdg-num { font-size: 20px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+    .sdg-1 { background: #e5243b; } .sdg-5 { background: #ff3a21; }
+    .sdg-8 { background: #a21942; } .sdg-12 { background: #bf8b2e; }
+    .sdg-13 { background: #3f7e44; } .sdg-17 { background: #19486a; }
+
+    /* ── DONATE ── */
+    #donate { padding: 100px 48px; background: var(--off-white); }
+    .donate-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .donate-inner .section-heading { margin-bottom: 12px; }
+    .donate-inner .section-body { margin: 0 auto 48px; text-align: center; }
+
+    /* Volunteer */
+    .volunteer-section { background: var(--white); padding: 56px; text-align: center; margin-bottom: 64px; }
+    .volunteer-section h3 { font-family: var(--font-display); font-size: 36px; font-weight: 400; color: var(--navy); margin-bottom: 12px; }
+    .volunteer-section p { font-size: 15px; color: var(--text-muted); font-weight: 300; margin-bottom: 28px; }
+
+    /* Donation widget */
+    .donation-widget { background: var(--white); padding: 48px; max-width: 640px; margin: 0 auto 64px; }
+    .donation-widget h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--navy); margin-bottom: 8px; }
+    .donation-widget p { font-size: 14px; color: var(--text-muted); font-weight: 300; margin-bottom: 28px; }
+    .donation-amounts { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+    .amount-btn {
+      padding: 12px 24px; border: 1px solid var(--border); background: var(--off-white);
+      font-family: var(--font-body); font-size: 14px; font-weight: 400; cursor: pointer;
+      transition: all 0.2s; color: var(--text);
+    }
+    .amount-btn:hover, .amount-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .donate-btn {
+      display: block; width: 100%; padding: 16px; background: var(--navy);
+      color: var(--white); border: none; font-family: var(--font-body);
+      font-size: 13px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; cursor: pointer; margin-top: 20px;
+      transition: background 0.25s;
+    }
+    .donate-btn:hover { background: var(--navy-mid); }
+
+    /* Support */
+    .support-section { background: var(--cream); padding: 56px; text-align: center; }
+    .support-section h3 { font-family: var(--font-display); font-size: 36px; font-weight: 400; color: var(--navy); margin-bottom: 12px; }
+    .support-section p { font-size: 15px; color: var(--text-muted); font-weight: 300; margin-bottom: 28px; }
+
+    /* ── FOUNDER ── */
+    #founder { padding: 100px 48px; background: var(--white); }
+    .founder-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .founder-image { aspect-ratio: 3/4; overflow: hidden; }
+    /* REPLACE WITH: <img src="images/shannen-csfdg.jpg" style="width:100%;height:100%;object-fit:cover;" /> */
+    .founder-image-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, #c8d8e4, #a0b8c8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(26,45,74,0.4); font-family: var(--font-body);
+    }
+    .founder-text h3 { font-family: var(--font-display); font-size: 32px; font-weight: 400; color: var(--navy); margin-bottom: 6px; }
+    .founder-text h4 { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+    .founder-text p { font-size: 15px; line-height: 1.85; color: var(--text-muted); font-weight: 300; margin-bottom: 24px; }
+    .founder-social { display: flex; gap: 12px; }
+    .social-link { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; font-size: 12px; transition: all 0.2s; }
+    .social-link:hover { background: var(--navy); border-color: var(--navy); color: white; }
+
+    /* ── PRESS ── */
+    #press { padding: 80px 48px; background: var(--off-white); }
+    .press-label { text-align: center; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 48px; }
+    /* REPLACE SPANS WITH: <img src="images/press-NAME.png" alt="NAME" class="press-img" />
+       .press-img { height: 32px; width: auto; opacity: 0.55; filter: grayscale(1); transition: all 0.2s; }
+       .press-img:hover { opacity: 1; filter: grayscale(0); }
+    */
+    .press-row-1 { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 48px 72px; max-width: 900px; margin: 0 auto 40px; }
+    .press-row-2 { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 32px 56px; max-width: 900px; margin: 0 auto; }
+    .press-logo { font-family: var(--font-display); font-size: 20px; color: var(--text); opacity: 0.55; transition: opacity 0.2s; }
+    .press-logo:hover { opacity: 1; }
+
+    /* ── INSTAGRAM ── */
+    #instagram { padding: 80px 48px; background: var(--white); text-align: center; }
+    .insta-heading { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--navy); margin-bottom: 8px; }
+    .insta-handle { font-size: 14px; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 40px; }
+    /* REPLACE WITH ACTUAL INSTAGRAM EMBED OR IMAGES */
+    .insta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; max-width: 720px; margin: 0 auto; }
+    .insta-placeholder { aspect-ratio: 1; background: var(--cream); }
+    .insta-placeholder:nth-child(2) { background: #d8cec4; }
+    .insta-placeholder:nth-child(3) { background: #c8d4c0; }
+    .insta-placeholder:nth-child(4) { background: #c4ccd8; }
+
+    /* ── COMMUNITY ── */
+    #community { padding: 80px 48px; background: var(--navy); text-align: center; }
+    .community-heading { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); font-weight: 400; color: var(--white); margin-bottom: 12px; }
+    .community-sub { font-size: 15px; color: rgba(255,255,255,0.6); font-weight: 300; margin-bottom: 36px; font-style: italic; }
+    .email-form { display: flex; max-width: 480px; margin: 0 auto; }
+    .email-input {
+      flex: 1; padding: 14px 20px; border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08); color: var(--white);
+      font-family: var(--font-body); font-size: 14px; font-weight: 300;
+      outline: none;
+    }
+    .email-input::placeholder { color: rgba(255,255,255,0.35); }
+    .email-submit {
+      padding: 14px 28px; background: var(--gold); color: var(--white);
+      border: none; font-family: var(--font-body); font-size: 12px;
+      font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.25s;
+    }
+    .email-submit:hover { background: var(--gold-light); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 48px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: start; }
+    .footer-brand .brand-name { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: var(--navy); margin-bottom: 8px; }
+    .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+    .footer-nav h5, .footer-social h5 { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+    .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--navy); }
+    .footer-social .social-links { display: flex; gap: 10px; }
+    .footer-bottom {
+      background: var(--white); border-top: 1px solid var(--border);
+      padding: 16px 48px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-bottom p { font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; }
+    .footer-bottom a { font-size: 11px; color: var(--text-muted); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--navy); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      #about, #programs, #sustainability, #donate, #founder, #press, #instagram, #community { padding-left: 24px; padding-right: 24px; }
+      .about-inner, .founder-inner, .why-now, .fund-section { grid-template-columns: 1fr; gap: 48px; }
+      .program-feature { grid-template-columns: 1fr; }
+      .pillars-grid, .instructors-grid { grid-template-columns: 1fr; }
+      .insta-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { grid-template-columns: 1fr; padding: 40px 24px; }
+      .footer-bottom { flex-direction: column; gap: 8px; padding: 16px 24px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#home">
+      <div class="logo-circle"><span class="logo-circle-text">SFDG</span></div>
+      <span class="logo-full-text">Council on Sustainable Fashion & Design of Grenada</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#sustainability">Sustainability</a></li>
+      <li><a href="#donate" class="nav-donate">Donate</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-bg"></div>
+    <!-- REPLACE .hero-bg div with:
+    <img src="images/hero.jpg" alt="CSFDG" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.55));"></div>
+    -->
+    <div class="hero-content">
+      <h1>Council on Sustainable Fashion &amp; Design of Grenada<span>&amp; the Greater Caribbean</span></h1>
+      <p class="hero-subtitle">We are the social impact arm of <a href="https://www.kayliagroup.com">The Kaylia Group</a></p>
+      <a href="#about" class="btn-hero">Learn More</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-visual reveal">
+        <!-- REPLACE WITH: <img src="images/about.jpg" alt="CSFDG team" style="width:100%;height:100%;object-fit:cover;" /> -->
+        <div class="about-visual-placeholder">Your image here</div>
+      </div>
+      <div class="reveal">
+        <p class="section-label">About CSFDG</p>
+        <h2 class="section-heading">Mission &amp; Vision</h2>
+        <div class="mission-vision">
+          <div class="mv-item">
+            <p class="mv-label">Mission</p>
+            <p class="mv-text">To provide resources and skills training for circular product development to entrepreneurs of Caribbean SIDS while raising awareness of vulnerabilities to climate change.</p>
+          </div>
+          <div class="mv-item">
+            <p class="mv-label">Vision</p>
+            <p class="mv-text">To develop a thriving circular economy of entrepreneurs and influence effective climate change resilience strategies on Caribbean SIDS.</p>
+          </div>
+        </div>
+        <br />
+        <a href="#programs" class="btn-primary" style="margin-top:8px;">Our Programs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section id="founder" style="background:var(--off-white);">
+    <div class="founder-inner" style="max-width:1100px; margin:0 auto;">
+      <div class="reveal">
+        <p class="section-label">Our Founder</p>
+        <h3 class="section-heading" style="font-family:var(--font-display);">I'm Shannen Henry</h3>
+        <h4 style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Founder &amp; Executive Director at CSFDG</h4>
+        <p class="section-body">As a biologist and sustainability specialist with over 7 years of expertise in luxury fashion and lifestyle products, I know that sustainability is the bridge between creative economy and the sciences. I'm committed to amplifying this narrative through actionable programs at CSFDG.</p>
+        <p class="section-body" style="margin-top:16px;">The creative economies have an untapped potential to enhance small island developing states (SIDS) climate resilience.</p>
+        <br />
+        <div class="founder-social" style="margin-top:16px;">
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-link" aria-label="Instagram">&#9679;</a>
+        </div>
+      </div>
+      <div class="founder-image reveal">
+        <!-- REPLACE WITH: <img src="images/shannen-csfdg.jpg" alt="Shannen Henry" style="width:100%;height:100%;object-fit:cover;" /> -->
+        <div class="founder-image-placeholder">Your photo here</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section id="programs">
+    <div class="programs-inner">
+      <div class="programs-header reveal">
+        <p class="section-label">Programs</p>
+        <h2 class="section-heading">About CSFDG Programs</h2>
+        <p class="section-body">CSFDG delivers educational and skills training programs to entrepreneurs within the creative economy of Grenada and CARICOM. Starting with the Kaylia Couturier Program.</p>
+      </div>
+
+      <div class="program-feature reveal">
+        <div class="program-image">
+          <!-- REPLACE WITH: <img src="images/couturier-program.jpg" style="width:100%;height:100%;object-fit:cover;" /> -->
+          <div class="program-image-placeholder">Program image</div>
+        </div>
+        <div class="program-content">
+          <span class="program-tag">Flagship Initiative · 2025</span>
+          <h3 class="program-title">Kaylia Couturier Program</h3>
+          <p class="program-subtitle">Precision. Patience. Quality.</p>
+          <p class="program-body">The Kaylia Couturier Program, designed by The Kaylia Group, is CSFDG's flagship initiative — teaching high-quality sewing and pattern-making skills, particularly to women. The program begins in Grenada, chosen due to the personal connection of the organization's founder. This initiative will help break down social and cultural barriers on the island, creating opportunities for local talent to gain exposure and develop their skills.</p>
+          <a href="#contact" class="btn-outline" style="align-self:flex-start; margin-top:8px;">Learn More</a>
+        </div>
+      </div>
+
+      <div class="instructors reveal">
+        <h3>Program Instructors</h3>
+        <div class="instructors-grid">
+          <div class="instructor-card">
+            <p class="instructor-role">Course Instructor · Author · Professor at Columbia SPS</p>
+            <p class="instructor-name">Francesca Belluomini</p>
+            <p class="instructor-courses">Course Titles: Timeless Fashion, Cultivating Style</p>
+          </div>
+          <div class="instructor-card">
+            <p class="instructor-role">Designer · Degree Candidate at FIT, New York</p>
+            <p class="instructor-name">Vitoria Becker de Souza</p>
+            <p class="instructor-courses">Course Titles: Fashion Illustration, Technical Package Design</p>
+          </div>
+          <div class="instructor-card">
+            <p class="instructor-role">Course Instructor</p>
+            <p class="instructor-name">[Instructor TBA]</p>
+            <p class="instructor-courses">Course Title: Cut &amp; Sew</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fund-section reveal">
+        <div>
+          <p class="fund-label">The Kaylia Couturier Program is Supported by</p>
+          <!-- REPLACE WITH: <img src="images/fashion-impact-fund.png" alt="Fashion Impact Fund" style="height:60px;width:auto;" /> -->
+          <div class="fund-logo-placeholder">Fashion<br>Impact Fund</div>
+        </div>
+        <div>
+          <p class="fund-body">The Fashion Impact Fund, an initiative of PVBLIC Foundation, supports fashion skills training programs led by women for women to achieve education, employment and economic inclusion. By investing in fashion workforce development solutions for women, we can create lasting and transformative impact on their lives, communities, and the sector globally.</p>
+          <br />
+          <a href="#" class="btn-outline" style="border-color:rgba(255,255,255,0.4);color:white;margin-top:16px;">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUSTAINABILITY -->
+  <section id="sustainability">
+    <div class="sust-inner">
+      <div class="sust-header reveal">
+        <p class="section-label">Sustainability</p>
+        <h2 class="section-heading">Our Sustainability Pillars</h2>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card reveal">
+          <div class="pillar-num">1</div>
+          <h3 class="pillar-title">People</h3>
+          <p class="pillar-body">Implementing community-driven initiatives that promote sustainable lifestyles, social equity, and grassroots involvement for tangible and positive societal impact.</p>
+        </div>
+        <div class="pillar-card reveal reveal-delay-1">
+          <div class="pillar-num">2</div>
+          <h3 class="pillar-title">Planet</h3>
+          <p class="pillar-body">Minimizing ecological footprints and promoting a regenerative relationship with the planet. Increasing access to renewable resources and sustainability education.</p>
+        </div>
+        <div class="pillar-card reveal reveal-delay-2">
+          <div class="pillar-num">3</div>
+          <h3 class="pillar-title">Culture</h3>
+          <p class="pillar-body">Integrating sustainable practices into the preservation and promotion of Caribbean cultural heritage, fostering a dynamic synergy between tradition and innovation.</p>
+        </div>
+      </div>
+
+      <div class="un-section reveal">
+        <!-- REPLACE WITH: <img src="images/un-fashion-network.png" alt="UN Fashion & Lifestyle Network" style="height:60px;margin-bottom:24px;" /> -->
+        <div class="un-logo-text">United Nations Fashion &amp; Lifestyle Network</div>
+        <p class="un-body">The Council on Sustainable Fashion and Design of Grenada is a proud member of the United Nations Fashion &amp; Lifestyle Network since our inception in 2024. The Network plays a key role in advancing the Sustainable Development Goals (SDGs) by connecting industry stakeholders, media, governments, and UN entities.</p>
+        <p class="un-body">You can learn more about CSFDG's commitment to the global goals and our deliverables for 2030 by visiting <a href="https://sdgs.un.org/partnerships/csfdg" class="un-link" target="_blank">sdgs.un.org/partnerships/csfdg</a></p>
+        <br />
+        <p class="un-body" style="font-style:italic; font-family:var(--font-display); font-size:18px; color:var(--navy);">"Small Island Developing States (SIDS) emit less than 1% of global carbon emissions annually, yet they are the most vulnerable to the effects of climate change"</p>
+        <p class="un-body" style="margin-top:16px;">That's why CSFDG is a member with registered commitments to the United Nations Small Island Developing States Partnership Framework.</p>
+      </div>
+
+      <div class="why-now reveal">
+        <div class="why-title">Our<br>Story</div>
+        <div class="why-content">
+          <h3>Why Now?</h3>
+          <p>Nestled in the embrace of the Caribbean, Grenada is classified as a Small Island Developing State (SIDS) by the United Nations. Its beauty is intertwined with the vulnerability to climate change. Rising sea levels, intensified hurricanes, and shifting weather patterns pose real threats.</p>
+          <p>At CSFDG, we believe in harnessing the power of the creative economy to shape a different story. Through art, architecture, fashion, and overall sustainable design, we weave a narrative of awareness and resilience, nurturing a community that not only adapts to climate challenges but actively advocates for change.</p>
+          <p>Join us on this journey where creativity becomes a catalyst for building climate resilience in the heart of the Caribbean.</p>
+        </div>
+      </div>
+
+      <div class="sdg-section reveal">
+        <p class="sdg-label">At CSFDG our programs work toward the following Sustainable Development Goals</p>
+        <div class="sdg-grid">
+          <div class="sdg-tile sdg-1"><div class="sdg-num">1</div>No Poverty</div>
+          <div class="sdg-tile sdg-5"><div class="sdg-num">5</div>Gender Equality</div>
+          <div class="sdg-tile sdg-8"><div class="sdg-num">8</div>Decent Work &amp; Growth</div>
+          <div class="sdg-tile sdg-12"><div class="sdg-num">12</div>Responsible Consumption</div>
+          <div class="sdg-tile sdg-13"><div class="sdg-num">13</div>Climate Action</div>
+          <div class="sdg-tile sdg-17"><div class="sdg-num">17</div>Partnerships</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE -->
+  <section id="donate">
+    <div class="donate-inner">
+      <div class="volunteer-section reveal">
+        <h3>Volunteer with CSFDG</h3>
+        <p>Interested in volunteering your time with CSFDG? Fill out the form in the link below.</p>
+        <a href="mailto:team@csfdg.com?subject=Volunteering with CSFDG" class="btn-outline">Volunteer</a>
+      </div>
+
+      <div class="donation-widget reveal">
+        <h3>Donate to Support CSFDG Programs</h3>
+        <p>Help circular entrepreneurs on Caribbean SIDS get the resources they need to succeed!</p>
+        <p class="section-label">Select donation amount</p>
+        <div class="donation-amounts">
+          <button class="amount-btn">$50</button>
+          <button class="amount-btn active">$100</button>
+          <button class="amount-btn">$250</button>
+          <button class="amount-btn">$500</button>
+          <button class="amount-btn">Custom Amount</button>
+        </div>
+        <button class="donate-btn">Donate $100</button>
+      </div>
+
+      <div class="support-section reveal">
+        <h3>Support CSFDG</h3>
+        <p>Do you have alternative resources that could help support CSFDG's mission?</p>
+        <p style="font-size:14px; color:var(--text-muted); margin-bottom:24px;">Contact us at: <a href="mailto:team@csfdg.com" style="color:var(--navy);">team@csfdg.com</a></p>
+        <a href="mailto:team@csfdg.com" class="btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS -->
+  <section id="press">
+    <p class="press-label reveal">As Seen In</p>
+    <!-- Row 1: bigger publications -->
+    <div class="press-row-1 reveal">
+      <!-- REPLACE WITH <img> tags -->
+      <span class="press-logo" style="font-weight:500;letter-spacing:0.12em;font-family:var(--font-body);font-size:26px;">EBONY</span>
+      <span class="press-logo" style="font-size:14px;font-weight:500;border:1.5px solid currentColor;padding:6px 10px;">no kill<br><small style="font-size:9px;letter-spacing:0.12em;">MAGAZINE</small></span>
+      <span class="press-logo" style="font-style:italic;font-size:22px;">Caribbean<strong style="font-style:normal;">Beat</strong></span>
+    </div>
+    <!-- Row 2: partners/networks -->
+    <div class="press-row-2 reveal">
+      <span class="press-logo" style="font-size:14px;font-weight:500;letter-spacing:0.1em;">▶ NOW<br><small style="font-size:9px;letter-spacing:0.16em;">GRENADA</small></span>
+      <span class="press-logo" style="font-size:13px;letter-spacing:0.06em;">SIDS<br><small style="font-size:9px;letter-spacing:0.1em;">GLOBAL BUSINESS NETWORK</small></span>
+      <span class="press-logo" style="font-size:22px;font-style:italic;">loop</span>
+      <span class="press-logo" style="font-size:13px;letter-spacing:0.2em;">PVBLIC<br><small style="font-size:9px;">FOUNDATION</small></span>
+      <span class="press-logo" style="font-size:12px;letter-spacing:0.08em;text-align:center;">BLUE PLANET<br>ALLIANCE</span>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section id="instagram">
+    <h3 class="insta-heading reveal">Follow us on Instagram</h3>
+    <p class="insta-handle reveal">@csfdgrenada</p>
+    <!-- REPLACE WITH real Instagram embed or 4 images -->
+    <div class="insta-grid reveal">
+      <div class="insta-placeholder"></div>
+      <div class="insta-placeholder"></div>
+      <div class="insta-placeholder"></div>
+      <div class="insta-placeholder"></div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY / EMAIL SIGNUP -->
+  <section id="community">
+    <h2 class="community-heading reveal">Join the CSFDG Community</h2>
+    <p class="community-sub reveal">Stay connected and be the first to learn about upcoming events and programs!</p>
+    <div class="email-form reveal">
+      <input class="email-input" type="email" placeholder="Enter your email here" />
+      <button class="email-submit">Stay Connected</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <p class="brand-name">CSFDG</p>
+      <p>St Patrick's, Grenada, West Indies<br>team@csfdg.com<br>csfdg.com</p>
+    </div>
+    <div class="footer-nav">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#sustainability">Sustainability</a></li>
+        <li><a href="#donate">Donate</a></li>
+      </ul>
+    </div>
+    <div class="footer-social">
+      <h5>Connect</h5>
+      <div class="social-links">
+        <a href="https://www.instagram.com/csfdgrenada" target="_blank" class="social-link" aria-label="Instagram">&#9679;</a>
+        <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025 CSFDG. All Rights Reserved.</p>
+    <div style="display:flex;gap:24px;">
+      <a href="#about">About</a>
+      <a href="mailto:team@csfdg.com">Contact</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav active
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+      navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+    });
+
+    // Donation amount buttons
+    const amountBtns = document.querySelectorAll('.amount-btn');
+    const donateBtn = document.querySelector('.donate-btn');
+    amountBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        amountBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const val = btn.textContent.trim();
+        donateBtn.textContent = val === 'Custom Amount' ? 'Donate' : `Donate ${val}`;
+      });
+    });
+  </script>
+</body>
+</html>
